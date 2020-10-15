@@ -23,16 +23,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const sections = [
-  { title: 'Technology', url: '#' },
-  { title: 'Design', url: '#' },
-  { title: 'Culture', url: '#' },
-  { title: 'Business', url: '#' },
-  { title: 'Politics', url: '#' },
-  { title: 'Opinion', url: '#' },
-  { title: 'Science', url: '#' },
-  { title: 'Health', url: '#' },
-  { title: 'Style', url: '#' },
-  { title: 'Travel', url: '#' },
+  { title: 'News', url: '#' },
+  { title: 'Products', url: '#' },
+  { title: 'Contacts', url: '#' },
 ]
 
 const mainFeaturedPost = {
@@ -93,11 +86,12 @@ const sidebar = {
 
 const GET_BLOG_POSTS = gql`
 query MyQuery {
-  blogPost {
+  newsArticle {
+    author
+    publishedUtc
     markdownBody {
       markdown
     }
-    publishedUtc
     displayText
   }
 }
@@ -107,40 +101,21 @@ export default function Blog() {
   const classes = useStyles()
   const { loading, error, data } = useQuery(GET_BLOG_POSTS)
 
-  const featuredPosts = () => {
-    
-    if (loading) return null
-    if (error) { 
-      console.log(error)
-      return null
-
-    }
-  
-    return data.blogPost
-  }
-  
-
   return (
     <>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Blog" sections={sections} />
+        <Header title="ACME Corporation" sections={sections} />
         <main>
-          <MainFeaturedPost post={mainFeaturedPost} />
+          {data &&
+            <MainFeaturedPost post={data?.newsArticle[0]} />
+          }
           <Grid container spacing={4}>
-            {data?.blogPost?.map((post) => (
+            {data?.newsArticle?.map((post) => (
               <FeaturedPost key={post.displayText} post={post} />
             ))}
           </Grid>
-          <Grid container spacing={5} className={classes.mainGrid}>
-            <Main title="From the firehose" posts={posts} />
-            <Sidebar
-              title={sidebar.title}
-              description={sidebar.description}
-              archives={sidebar.archives}
-              social={sidebar.social}
-            />
-          </Grid>
+          
         </main>
       </Container>
       <Footer title="Footer" description="Something here to give the footer a purpose!" />

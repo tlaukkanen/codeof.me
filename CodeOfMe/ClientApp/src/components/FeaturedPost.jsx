@@ -8,6 +8,7 @@ import CardActionArea from '@material-ui/core/CardActionArea'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Hidden from '@material-ui/core/Hidden'
+import Moment from 'react-moment'
 
 const useStyles = makeStyles({
   card: {
@@ -32,22 +33,18 @@ export default function FeaturedPost(props) {
           <div className={classes.cardDetails}>
             <CardContent>
               <Typography component="h2" variant="h5">
-                {post.title}
+                {post.displayText}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
-                {post.date}
+                <Moment format="DD.MM.YYYY">
+                  {post.publishedUtc}
+                </Moment>
               </Typography>
               <Typography variant="subtitle1" paragraph>
-                {post.description}
-              </Typography>
-              <Typography variant="subtitle1" color="primary">
-                Continue reading...
+                {post.markdownBody.markdown}
               </Typography>
             </CardContent>
           </div>
-          <Hidden xsDown>
-            <CardMedia className={classes.cardMedia} image={post.image} title={post.imageTitle} />
-          </Hidden>
         </Card>
       </CardActionArea>
     </Grid>
