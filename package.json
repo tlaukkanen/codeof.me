@@ -1,6 +1,6 @@
 {
-  "name": "contentful-starter-gatsby-blog",
-  "description": "Contentful Gatsby Starter Blog",
+  "name": "codeof-me",
+  "description": "codeof.me blog",
   "private": true,
   "version": "0.0.1",
   "author": "Contentful <opensource@contentful.com>",
@@ -43,11 +43,6 @@
   "scripts": {
     "dev": "gatsby develop",
     "build": "gatsby build",
-    "heroku-postbuild": "gatsby build",
-    "serve": "gatsby serve",
-    "postinstall": "node ./bin/hello.js",
-    "setup": "node ./bin/setup.js",
-    "netlify:login": "netlify login",
-    "netlify:deploy": "netlify deploy -d public -p"
+    "serve": "gatsby serve"
   }
 }
